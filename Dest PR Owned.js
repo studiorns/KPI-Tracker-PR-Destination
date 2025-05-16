@@ -19,7 +19,7 @@ const CHART_COLORS = {
 
 // Constants for frequently used values
 const METRICS_CONTAINER_ID = 'metrics-container';
-const LATEST_MONTH = 'March'; // Make sure this matches exactly with the month name in the CSV
+const LATEST_MONTH = 'April'; // Make sure this matches exactly with the month name in the CSV
 const TOGGLE_DARK_MODE_ID = 'toggle-dark-mode';
 
 /**
@@ -243,13 +243,6 @@ function calculateTotals(data) {
       ytdActual: {},
       ytdForecast: {},
       momChange: {}
-    },
-    AVE: {
-      actual: {},
-      forecast: {},
-      ytdActual: {},
-      ytdForecast: {},
-      momChange: {}
     }
   };
   
@@ -370,13 +363,6 @@ function formatNumber(number, metric) {
     } else if (number >= 1000000) {
       return (number / 1000000).toFixed(1) + 'M';
     }
-  } else if (metric === 'AVE') {
-    if (number >= 1000000) {
-      return '$' + (number / 1000000).toFixed(1) + 'M';
-    } else if (number >= 1000) {
-      return '$' + (number / 1000).toFixed(1) + 'K';
-    }
-    return '$' + number.toFixed(0);
   }
   
   if (number >= 1000000) {
@@ -525,20 +511,20 @@ function createActualVsForecastChart(canvasId, data, initiative, subInitiative, 
     
     const metricData = data.structured[initiative][subInitiative][metric];
     
-    // Get all months with data (only Q1 months)
+    // Get all months with data (January through April)
     const allMonths = Object.keys(metricData.actual);
     console.log(`All months in data: ${allMonths.join(', ')}`);
     
-    // Filter for Q1 months (January, February, March)
-    const q1Months = ['January', 'February', 'March'];
-    const months = allMonths.filter(month => q1Months.includes(month));
+    // Filter for January through April months
+    const displayMonths = ['January', 'February', 'March', 'April'];
+    const months = allMonths.filter(month => displayMonths.includes(month));
     
     if (months.length === 0) {
-      console.warn(`No Q1 monthly data found for ${initiative} - ${subInitiative} - ${metric}`);
+      console.warn(`No monthly data found for ${initiative} - ${subInitiative} - ${metric}`);
     }
     
     // Sort months chronologically
-    months.sort((a, b) => q1Months.indexOf(a) - q1Months.indexOf(b));
+    months.sort((a, b) => displayMonths.indexOf(a) - displayMonths.indexOf(b));
     console.log(`Found ${months.length} months of data: ${months.join(', ')}`);
     
     // Extract actual and forecast data
@@ -561,8 +547,7 @@ function createActualVsForecastChart(canvasId, data, initiative, subInitiative, 
     // Define specific colors for each metric for consistency
     const metricColors = {
       'Clippings': CHART_COLORS.blue,
-      'Reach': CHART_COLORS.green,
-      'AVE': CHART_COLORS.orange
+      'Reach': CHART_COLORS.green
     };
     
     // Use the predefined color for this metric or fall back to a default
@@ -629,14 +614,13 @@ function createActualVsForecastChart(canvasId, data, initiative, subInitiative, 
 function createMonthlyTrendChart(canvasId, data, metric) {
   const ctx = document.getElementById(canvasId).getContext('2d');
   
-  const months = MONTHS.slice(0, 3); // Only Q1 months
+  const months = MONTHS.slice(0, 4); // January through April
   const datasets = [];
   
   // Define specific colors for each sub-initiative for consistency
   const metricColors = {
     'Clippings': CHART_COLORS.blue,
-    'Reach': CHART_COLORS.green,
-    'AVE': CHART_COLORS.orange
+    'Reach': CHART_COLORS.green
   };
   
   // For PR Owned, we only have one sub-initiative, so we'll show actual vs forecast
@@ -711,15 +695,14 @@ function createYTDAchievementChart(canvasId, data, ytdAchievement) {
   const ctx = document.getElementById(canvasId).getContext('2d');
   
   const datasets = [];
-  const latestMonth = 'March'; // Latest month with actual data
+  const latestMonth = 'April'; // Latest month with actual data
   
   console.log('Creating YTD achievement chart with data for month:', latestMonth);
   
   // Define specific colors for each metric for consistency
   const metricColors = {
     'Clippings': CHART_COLORS.blue,
-    'Reach': CHART_COLORS.green,
-    'AVE': CHART_COLORS.orange
+    'Reach': CHART_COLORS.green
   };
   
   // For PR Owned, we only have one sub-initiative
@@ -728,8 +711,9 @@ function createYTDAchievementChart(canvasId, data, ytdAchievement) {
   
   if (data.structured[initiative] && data.structured[initiative][subInitiative]) {
     const achievementData = [];
+    const filteredMetrics = data.metrics.filter(metric => metric !== 'AVE');
     
-    data.metrics.forEach(metric => {
+    filteredMetrics.forEach(metric => {
       if (ytdAchievement[initiative][subInitiative][metric] && 
           ytdAchievement[initiative][subInitiative][metric][latestMonth]) {
         const achievementValue = ytdAchievement[initiative][subInitiative][metric][latestMonth];
@@ -748,8 +732,8 @@ function createYTDAchievementChart(canvasId, data, ytdAchievement) {
     datasets.push({
       label: 'YTD Achievement',
       data: achievementData,
-      backgroundColor: data.metrics.map(metric => metricColors[metric] || CHART_COLORS.blue),
-      borderColor: data.metrics.map(metric => metricColors[metric] || CHART_COLORS.blue),
+      backgroundColor: filteredMetrics.map(metric => metricColors[metric] || CHART_COLORS.blue),
+      borderColor: filteredMetrics.map(metric => metricColors[metric] || CHART_COLORS.blue),
       borderWidth: 1
     });
   }
@@ -757,7 +741,7 @@ function createYTDAchievementChart(canvasId, data, ytdAchievement) {
   const chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: data.metrics,
+      labels: data.metrics.filter(metric => metric !== 'AVE'),
       datasets: datasets
     },
     options: {
@@ -952,7 +936,7 @@ function populateMetricCards() {
         const metrics = Object.keys(dashboardData.structured[initiative][subInitiative]);
         console.log(`Found ${metrics.length} metrics for ${subInitiative}`);
         
-        metrics.forEach(metric => {
+        metrics.filter(metric => metric !== 'AVE').forEach(metric => {
           try {
             console.log(`Creating card for ${initiative} - ${subInitiative} - ${metric}`);
             
@@ -1005,8 +989,7 @@ function populateMetricCards() {
             // Define icons for each metric
             const metricIcons = {
               'Clippings': 'fa-newspaper',
-              'Reach': 'fa-bullhorn',
-              'AVE': 'fa-dollar-sign'
+              'Reach': 'fa-bullhorn'
             };
             
             // Create card content
@@ -1068,7 +1051,7 @@ function populateMetricCards() {
 }
 
 /**
- * Creates total metric cards for clippings, reach, and AVE
+ * Creates total metric cards for clippings and reach
  */
 function createTotalMetricCards() {
   try {
@@ -1085,7 +1068,7 @@ function createTotalMetricCards() {
     totalMetricsContainer.innerHTML = '';
     
     // Define metrics to display
-    const metricsToDisplay = ['Clippings', 'Reach', 'AVE'];
+    const metricsToDisplay = ['Clippings', 'Reach'];
     
     // Create YTD cards for each metric FIRST
     metricsToDisplay.forEach(metric => {
@@ -1117,8 +1100,7 @@ function createTotalMetricCards() {
         // Define icons for each metric
         const metricIcons = {
           'Clippings': 'fa-newspaper',
-          'Reach': 'fa-bullhorn',
-          'AVE': 'fa-dollar-sign'
+          'Reach': 'fa-bullhorn'
         };
         
         // Create card content
@@ -1181,8 +1163,7 @@ function createTotalMetricCards() {
         // Define icons for each metric
         const metricIcons = {
           'Clippings': 'fa-newspaper',
-          'Reach': 'fa-bullhorn',
-          'AVE': 'fa-dollar-sign'
+          'Reach': 'fa-bullhorn'
         };
         
         // Create card content

@@ -692,7 +692,7 @@
                 </a>
             </div>
             <h1>Destination PR Owned KPI Dashboard</h1>
-            <p>Q1 2025 Performance Analysis</p>
+            <p>January-April 2025 Performance Analysis</p>
         </div>
     </header>
     
@@ -705,10 +705,10 @@
                 </button>
             </div>
             <div class="section-content">
-                <div class="insight-summary">
-                    <h3><i class="fas fa-lightbulb"></i>Total Performance</h3>
-                    <p>Aggregated metrics across PR Owned initiatives showing total clippings, reach, and AVE (Advertising Value Equivalent) with comparisons to forecast, and YTD performance.</p>
-                </div>
+            <div class="insight-summary">
+                <h3><i class="fas fa-lightbulb"></i>Total Performance</h3>
+                <p>Aggregated metrics across PR Owned initiatives showing total clippings and reach with comparisons to forecast, and YTD performance.</p>
+            </div>
                 
                 <div class="metrics-grid" id="total-metrics-container">
                     <!-- Total metric cards will be dynamically populated here -->
@@ -730,7 +730,7 @@
             <div class="section-content">
             <div class="insight-summary">
                 <h3><i class="fas fa-lightbulb"></i> Key Insights</h3>
-                <p>PR Owned metrics are significantly outperforming forecasts in Q1 2025. Clippings exceeded forecast by 211.7%, while Reach is at 192.4% of target. AVE (Advertising Value Equivalent) is underperforming at 37.5% of forecast, indicating a need to focus on higher-value media placements.</p>
+                <p>PR Owned metrics are significantly outperforming forecasts in Q1-April 2025. Clippings have reached 6,598 against a forecast of 1,724 (382.7% achievement). Reach has achieved 12.9B against a forecast of 8.8B (145.7% achievement). April performance was exceptional with 4,288 clippings (335.8% above forecast) and 4.8B reach (3.4% above forecast).</p>
             </div>
             
             <div class="metrics-grid" id="metrics-container">
@@ -756,7 +756,6 @@
                 <div class="tab-buttons">
                     <button class="tab-btn active" data-tab="clippings">Clippings</button>
                     <button class="tab-btn" data-tab="reach">Reach</button>
-                    <button class="tab-btn" data-tab="ave">AVE</button>
                 </div>
                 
                 <div class="tab-content active" id="clippings-tab">
@@ -771,11 +770,7 @@
                     </div>
                 </div>
                 
-                <div class="tab-content" id="ave-tab">
-                    <div class="chart-container">
-                        <canvas id="ave-trend-chart" data-lazy="true"></canvas>
-                    </div>
-                </div>
+                <!-- AVE tab removed -->
             </div>
             </div>
         </div>
@@ -817,9 +812,6 @@
                         <div class="chart-container">
                             <canvas id="campaigns-pr-owned-reach-chart" data-lazy="true"></canvas>
                         </div>
-                        <div class="chart-container">
-                            <canvas id="campaigns-pr-owned-ave-chart" data-lazy="true"></canvas>
-                        </div>
                     </div>
                 </div>
                 </div>
@@ -844,27 +836,27 @@
 Campaigns-PR Owned-Clippings-January,Campaigns,PR Owned,Clippings,January,230,180,230,180,,,,,,,,,,,,,,
 Campaigns-PR Owned-Clippings-February,Campaigns,PR Owned,Clippings,February,"1,194",40,"1,424",220,,,,,,,,,,,,,,
 Campaigns-PR Owned-Clippings-March,Campaigns,PR Owned,Clippings,March,886,520,"2,310",741,,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-April,Campaigns,PR Owned,Clippings,April,,984,"2,310","1,724",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-May,Campaigns,PR Owned,Clippings,May,,0,"2,310","1,724",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-June,Campaigns,PR Owned,Clippings,June,,69,"2,310","1,793",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-July,Campaigns,PR Owned,Clippings,July,,"1,064","2,310","2,857",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-August,Campaigns,PR Owned,Clippings,August,,"1,858","2,310","4,715",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-September,Campaigns,PR Owned,Clippings,September,,"9,775","2,310","14,490",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-October,Campaigns,PR Owned,Clippings,October,,"11,488","2,310","25,978",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-November,Campaigns,PR Owned,Clippings,November,,"4,568","2,310","30,546",,,,,,,,,,,,,,
-Campaigns-PR Owned-Clippings-December,Campaigns,PR Owned,Clippings,December,,"1,376","2,310","31,922",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-April,Campaigns,PR Owned,Clippings,April,"4,288",984,"6,598","1,724",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-May,Campaigns,PR Owned,Clippings,May,,0,"6,598","1,724",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-June,Campaigns,PR Owned,Clippings,June,,69,"6,598","1,793",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-July,Campaigns,PR Owned,Clippings,July,,"1,064","6,598","2,857",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-August,Campaigns,PR Owned,Clippings,August,,"1,858","6,598","4,715",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-September,Campaigns,PR Owned,Clippings,September,,"9,775","6,598","14,490",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-October,Campaigns,PR Owned,Clippings,October,,"11,488","6,598","25,978",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-November,Campaigns,PR Owned,Clippings,November,,"4,568","6,598","30,546",,,,,,,,,,,,,,
+Campaigns-PR Owned-Clippings-December,Campaigns,PR Owned,Clippings,December,,"1,376","6,598","31,922",,,,,,,,,,,,,,
 Campaigns-PR Owned-Reach-January,Campaigns,PR Owned,Reach,January,"5,173,574,924","1,209,521,032","5,173,574,924","1,209,521,032",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-February,Campaigns,PR Owned,Reach,February,"2,088,442,957","27,288,589","7,262,017,881","1,236,809,621",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-March,Campaigns,PR Owned,Reach,March,"859,780,956","2,984,033,019","8,121,798,837","4,220,842,640",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-April,Campaigns,PR Owned,Reach,April,,"4,612,694,481","8,121,798,837","8,833,537,121",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-May,Campaigns,PR Owned,Reach,May,,"1,723,634,767","8,121,798,837","10,557,171,888",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-June,Campaigns,PR Owned,Reach,June,,"97,991,641","8,121,798,837","10,655,163,530",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-July,Campaigns,PR Owned,Reach,July,,"11,000,447,876","8,121,798,837","21,655,611,406",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-August,Campaigns,PR Owned,Reach,August,,"6,300,545,335","8,121,798,837","27,956,156,741",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-September,Campaigns,PR Owned,Reach,September,,"58,856,256,409","8,121,798,837","86,812,413,151",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-October,Campaigns,PR Owned,Reach,October,,"30,439,087,627","8,121,798,837","117,251,500,778",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-November,Campaigns,PR Owned,Reach,November,,"6,977,320,552","8,121,798,837","124,228,821,330",,,,,,,,,,,,,,
-Campaigns-PR Owned-Reach-December,Campaigns,PR Owned,Reach,December,,"15,297,885,339","8,121,798,837","139,526,706,669",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-February,Campaigns,PR Owned,Reach,February,"1,836,108,356","27,288,589","7,009,683,280","1,236,809,621",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-March,Campaigns,PR Owned,Reach,March,"1,093,328,513","2,984,033,019","8,103,011,793","4,220,842,640",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-April,Campaigns,PR Owned,Reach,April,"4,771,525,978","4,612,694,481","12,874,537,771","8,833,537,121",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-May,Campaigns,PR Owned,Reach,May,,"1,723,634,767","12,874,537,771","10,557,171,888",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-June,Campaigns,PR Owned,Reach,June,,"97,991,641","12,874,537,771","10,655,163,530",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-July,Campaigns,PR Owned,Reach,July,,"11,000,447,876","12,874,537,771","21,655,611,406",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-August,Campaigns,PR Owned,Reach,August,,"6,300,545,335","12,874,537,771","27,956,156,741",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-September,Campaigns,PR Owned,Reach,September,,"58,856,256,409","12,874,537,771","86,812,413,151",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-October,Campaigns,PR Owned,Reach,October,,"30,439,087,627","12,874,537,771","117,251,500,778",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-November,Campaigns,PR Owned,Reach,November,,"6,977,320,552","12,874,537,771","124,228,821,330",,,,,,,,,,,,,,
+Campaigns-PR Owned-Reach-December,Campaigns,PR Owned,Reach,December,,"15,297,885,339","12,874,537,771","139,526,706,669",,,,,,,,,,,,,,
 Campaigns-PR Owned-AVE-January,Campaigns,PR Owned,AVE,January,"3,050,134","67,057,435","3,050,134","67,057,435",,,,,,,,,,,,,,
 Campaigns-PR Owned-AVE-February,Campaigns,PR Owned,AVE,February,"15,336,930","382,849","18,387,064","67,440,284",,,,,,,,,,,,,,
 Campaigns-PR Owned-AVE-March,Campaigns,PR Owned,AVE,March,"12,300,840","14,316,096","30,687,904","81,756,380",,,,,,,,,,,,,,

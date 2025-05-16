@@ -1,5 +1,5 @@
 /**
- * Creates total metric cards for clippings, reach, and AVE
+ * Creates total metric cards for clippings and reach
  */
 function createTotalMetricCards() {
   try {
@@ -16,7 +16,7 @@ function createTotalMetricCards() {
     totalMetricsContainer.innerHTML = '';
     
     // Define metrics to display
-    const metricsToDisplay = ['Clippings', 'Reach', 'AVE'];
+    const metricsToDisplay = ['Clippings', 'Reach'];
     
     // Create YTD cards for each metric
     metricsToDisplay.forEach(metric => {
@@ -48,8 +48,7 @@ function createTotalMetricCards() {
         // Define icons for each metric
         const metricIcons = {
           'Clippings': 'fa-newspaper',
-          'Reach': 'fa-bullhorn',
-          'AVE': 'fa-dollar-sign'
+          'Reach': 'fa-bullhorn'
         };
         
         // Create card content
@@ -136,7 +135,7 @@ function populateMetricCards() {
         const metrics = Object.keys(dashboardData.structured[initiative][subInitiative]);
         console.log(`Found ${metrics.length} metrics for ${subInitiative}`);
         
-        metrics.forEach(metric => {
+        metrics.filter(metric => metric !== 'AVE').forEach(metric => {
           try {
             console.log(`Creating card for ${initiative} - ${subInitiative} - ${metric}`);
             
@@ -189,8 +188,7 @@ function populateMetricCards() {
             // Define icons for each metric
             const metricIcons = {
               'Clippings': 'fa-newspaper',
-              'Reach': 'fa-bullhorn',
-              'AVE': 'fa-dollar-sign'
+              'Reach': 'fa-bullhorn'
             };
             
             // Create card content
